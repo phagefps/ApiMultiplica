@@ -11,10 +11,34 @@ use App\Http\Resources\V1\TransactionResource;
 class TransactionController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(
+    *     path="/api/users/{token}/transactions/{client_id}",
+    *     tags={"TRANSACTIONS"},
+    *     summary="Muestra todas las transacciones de un usuario",
+    *     @OA\Parameter(
+    *         description="Parameter",
+    *         in="path",
+    *         name="token",
+    *         required=true,
+    *         @OA\Schema(type="string"),
+    *     ),
+    *     @OA\Parameter(
+    *         description="Parameter",
+    *         in="path",
+    *         name="client_id",
+    *         required=true,
+    *         @OA\Schema(type="integer"),
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Muestra todas las transacciones de un usuario de manera descendente y paginación."
+    *     ),
+    *     @OA\Response(
+    *         response=401,
+    *         description="Token incorrecto o cliente no existente."
+    *     )
+    * )
+    */
     public function index($token, $client_id)
     {
         if(System::firstWhere('token', $token)) {

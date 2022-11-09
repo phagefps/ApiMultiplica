@@ -11,10 +11,27 @@ use App\Http\Resources\V1\LogResource;
 class LogController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(
+    *     path="/api/users/{token}/log",
+    *     tags={"LOG"},
+    *     summary="Muestra el log de todas las solicitudes a la ruta de buscar usuarios",
+    *     @OA\Parameter(
+    *         description="Parameter",
+    *         in="path",
+    *         name="token",
+    *         required=true,
+    *         @OA\Schema(type="string"),
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Muestra el log de todas las solicitudes a la ruta de buscar usuarios."
+    *     ),
+    *     @OA\Response(
+    *         response=401,
+    *         description="Token incorrecto."
+    *     )
+    * )
+    */
     public function index($token)
     {
         if(System::firstWhere('token', $token)) {

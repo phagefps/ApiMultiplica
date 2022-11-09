@@ -1,0 +1,184 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Multiplica | Enrique Marrero",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://apimultiplica.devel"
+        }
+    ],
+    "paths": {
+        "/api/users/{token}/log": {
+            "get": {
+                "tags": [
+                    "LOG"
+                ],
+                "summary": "Muestra el log de todas las solicitudes a la ruta de buscar usuarios",
+                "operationId": "df4cfb1fbba06c4fdbebad5fe43f6196",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Parameter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra el log de todas las solicitudes a la ruta de buscar usuarios."
+                    },
+                    "401": {
+                        "description": "Token incorrecto."
+                    }
+                }
+            }
+        },
+        "/api/users/{token}/transactions/{client_id}": {
+            "get": {
+                "tags": [
+                    "TRANSACTIONS"
+                ],
+                "summary": "Muestra todas las transacciones de un usuario",
+                "operationId": "2afe35d750c9484d1b56ca57ae025830",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Parameter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "path",
+                        "description": "Parameter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra todas las transacciones de un usuario de manera descendente y paginación."
+                    },
+                    "401": {
+                        "description": "Token incorrecto o cliente no existente."
+                    }
+                }
+            }
+        },
+        "/api/users/{token}": {
+            "get": {
+                "tags": [
+                    "USERS"
+                ],
+                "summary": "Muestra usuarios y url para transacciones",
+                "operationId": "be60d0fef1f88890e7645a0bf4f8be1b",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Parameter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra todos los usuarios de manera descendente, varias urls para visualizar las transacciones y paginación."
+                    },
+                    "401": {
+                        "description": "Token incorrecto."
+                    }
+                }
+            }
+        },
+        "/api/users/{token}/search/{val_search}": {
+            "post": {
+                "tags": [
+                    "USERS"
+                ],
+                "summary": "Buscar a usuarios por su ID, Nombre o Email",
+                "operationId": "5045d6ae092acc09cf58d2f2a0fd41ba",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Parameter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "val_search",
+                        "in": "path",
+                        "description": "Parameter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra a los usuarios que coincidan, limite de 20."
+                    },
+                    "401": {
+                        "description": "Token incorrecto."
+                    }
+                }
+            }
+        },
+        "/api/users/{token}/{client_id}": {
+            "get": {
+                "tags": [
+                    "USERS"
+                ],
+                "summary": "Muestra a un usuario en específico.",
+                "operationId": "5160cde611bc2379a224518439017cd6",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "path",
+                        "description": "Parameter",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "client_id",
+                        "in": "path",
+                        "description": "Parameter",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Muestra a un usuario en específico junto a sus transacciones y registra en el log la visita al mismo."
+                    },
+                    "401": {
+                        "description": "Token incorrecto."
+                    }
+                }
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

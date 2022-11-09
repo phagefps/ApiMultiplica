@@ -10,13 +10,36 @@ use Illuminate\Http\Request;
 use App\Http\Resources\V1\UserResource;
 use App\Http\Resources\V1\UserInformationResource;
 
+/**
+* @OA\Info(title="API Multiplica | Enrique Marrero", version="1.0")
+*
+* @OA\Server(url="http://apimultiplica.devel")
+*/
+
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(
+    *     path="/api/users/{token}",
+    *     tags={"USERS"},
+    *     summary="Muestra usuarios y url para transacciones",
+    *     @OA\Parameter(
+    *         description="Parameter",
+    *         in="path",
+    *         name="token",
+    *         required=true,
+    *         @OA\Schema(type="string"),
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Muestra todos los usuarios de manera descendente, varias urls para visualizar las transacciones y paginación."
+    *     ),
+    *     @OA\Response(
+    *         response=401,
+    *         description="Token incorrecto."
+    *     )
+    * )
+    */
     public function index($token)
     {
         if(System::firstWhere('token', $token)) {
@@ -27,10 +50,34 @@ class UserController extends Controller
     }
 
     /**
-     * Display a listing of the search.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Post(
+    *     path="/api/users/{token}/search/{val_search}",
+    *     tags={"USERS"},
+    *     summary="Buscar a usuarios por su ID, Nombre o Email",
+    *     @OA\Parameter(
+    *         description="Parameter",
+    *         in="path",
+    *         name="token",
+    *         required=true,
+    *         @OA\Schema(type="string"),
+    *     ),
+    *     @OA\Parameter(
+    *         description="Parameter",
+    *         in="path",
+    *         name="val_search",
+    *         required=true,
+    *         @OA\Schema(type="string"),
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Muestra a los usuarios que coincidan, limite de 20."
+    *     ),
+    *     @OA\Response(
+    *         response=401,
+    *         description="Token incorrecto."
+    *     )
+    * )
+    */
     public function search($token, $val_search)
     {
         if(System::firstWhere('token', $token)) {
@@ -52,11 +99,34 @@ class UserController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Transaction  $transaction
-     * @return \Illuminate\Http\Response
-     */
+    * @OA\Get(
+    *     path="/api/users/{token}/{client_id}",
+    *     tags={"USERS"},
+    *     summary="Muestra a un usuario en específico.",
+    *     @OA\Parameter(
+    *         description="Parameter",
+    *         in="path",
+    *         name="token",
+    *         required=true,
+    *         @OA\Schema(type="string"),
+    *     ),
+    *     @OA\Parameter(
+    *         description="Parameter",
+    *         in="path",
+    *         name="client_id",
+    *         required=true,
+    *         @OA\Schema(type="integer"),
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="Muestra a un usuario en específico junto a sus transacciones y registra en el log la visita al mismo."
+    *     ),
+    *     @OA\Response(
+    *         response=401,
+    *         description="Token incorrecto."
+    *     )
+    * )
+    */
     public function show(Request $request, $token, $client_id)
     {
         if(System::firstWhere('token', $token)) {
