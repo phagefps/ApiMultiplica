@@ -13,7 +13,6 @@ use App\Http\Resources\V1\UserInformationResource;
 /**
 * @OA\Info(title="API Multiplica | Enrique Marrero", version="1.0")
 *
-* @OA\Server(url="http://apimultiplica.devel")
 */
 
 class UserController extends Controller

@@ -4,11 +4,6 @@
         "title": "API Multiplica | Enrique Marrero",
         "version": "1.0"
     },
-    "servers": [
-        {
-            "url": "http://apimultiplica.devel"
-        }
-    ],
     "paths": {
         "/api/users/{token}/log": {
             "get": {
