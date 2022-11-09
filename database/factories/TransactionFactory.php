@@ -17,7 +17,7 @@ class TransactionFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => rand(1, 10),
+            'user_id' => rand(1, 50),
             'amount' => fake()->randomFloat(2, 1, 9999),
             'type' => fake()->randomElement(['deposit', 'withdraw']), // deposit, withdraw
             'message' => fake()->text(),
